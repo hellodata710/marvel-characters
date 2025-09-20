@@ -27,3 +27,8 @@ It is used to build classification and feature engineering models for various ML
 - `03.deploy_model.py`: Deploys the trained Marvel model to a Databricks model serving endpoint.
 - `04.post_commit_status.py`: Posts status updates for Marvel integration tests to GitHub.
 - `05.refresh_monitor.py`: Refreshes monitoring tables and dashboards for Marvel model serving.
+
+# some fixex to run the code
+updated code in notebooks\lecture6.deploy_model_serving_endpoint.py to use the basic model instead of custom as custom was giving some error.
+done changes in data_processor.py to fix error in job 
+To run the DAB job .. command - databricks bundle run deployment instead of databricks bundle run
