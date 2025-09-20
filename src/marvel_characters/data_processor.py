@@ -124,28 +124,17 @@ class DataProcessor:
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
 
-        train_set_with_timestamp.write.mode("overwrite").saveAsTable(
-            f"{self.config.catalog_name}.{self.config.schema_name}.train_set"
-        )
-
-        test_set_with_timestamp.write.mode("overwrite").saveAsTable(
-            f"{self.config.catalog_name}.{self.config.schema_name}.test_set"
-        )
+        # Use default database instead of Unity Catalog
+        train_set_with_timestamp.write.mode("overwrite").saveAsTable("train_set")
+        test_set_with_timestamp.write.mode("overwrite").saveAsTable("test_set")
 
     def enable_change_data_feed(self) -> None:
         """Enable Change Data Feed for train and test set tables.
 
         This method alters the tables to enable Change Data Feed functionality.
         """
-        self.spark.sql(
-            f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.train_set "
-            "SET TBLPROPERTIES (delta.enableChangeDataFeed = true);"
-        )
-
-        self.spark.sql(
-            f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.test_set "
-            "SET TBLPROPERTIES (delta.enableChangeDataFeed = true);"
-        )
+        self.spark.sql("ALTER TABLE train_set SET TBLPROPERTIES (delta.enableChangeDataFeed = true);")
+        self.spark.sql("ALTER TABLE test_set SET TBLPROPERTIES (delta.enableChangeDataFeed = true);")
 
 
 def generate_synthetic_data(df: pd.DataFrame, drift: bool = False, num_rows: int = 500) -> pd.DataFrame:

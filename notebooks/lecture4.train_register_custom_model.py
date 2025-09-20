@@ -1,4 +1,7 @@
 # Databricks notebook source
+# run below command in a separate cell if you are using databricks
+# %pip install marvel_characters-0.1.0-py3-none-any.whl
+# %restart_python
 
 import mlflow
 from pyspark.sql import SparkSession
@@ -52,9 +55,11 @@ wrapper.log_register_model(wrapped_model_uri=f"models:/{wrapped_model_version.mo
                            input_example=X_test[0:1],
                            tags=tags,
                            code_paths=code_paths)
-
+# use this in databricks code_paths=["../src/marvel_characters"]
 # COMMAND ----------
 # unwrap and predict
+# use below in databricks
+# mlflow.log_artifact(f"marvel_characters-{marvel_characters_v}-py3-none-any.whl", "dist")
 loaded_pufunc_model = mlflow.pyfunc.load_model(f"models:/{pyfunc_model_name}@latest-model")
 
 unwraped_model = loaded_pufunc_model.unwrap_python_model()
