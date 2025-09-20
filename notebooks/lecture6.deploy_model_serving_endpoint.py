@@ -28,12 +28,15 @@ w = WorkspaceClient()
 os.environ["DBR_HOST"] = w.config.host
 os.environ["DBR_TOKEN"] = w.tokens.create(lifetime_seconds=1200).token_value
 
+print(w.config.host)
+print(w.tokens.create(lifetime_seconds=1200).token_value)
+
 if not is_databricks():
     load_dotenv()
     profile = os.environ["PROFILE"]
     mlflow.set_tracking_uri(f"databricks://{profile}")
     mlflow.set_registry_uri(f"databricks-uc://{profile}")
-
+    print(profile)
 # Load project config
 config = ProjectConfig.from_yaml(config_path="../project_config_marvel.yml", env="dev")
 catalog_name = config.catalog_name
@@ -42,7 +45,7 @@ schema_name = config.schema_name
 # COMMAND ----------
 # Initialize model serving
 model_serving = ModelServing(
-    model_name=f"{catalog_name}.{schema_name}.marvel_character_model_custom", endpoint_name="marvel-character-model-serving"
+    model_name=f"{catalog_name}.{schema_name}.marvel_character_model_basic", endpoint_name="marvel-character-model-serving"
 )
 
 # COMMAND ----------
@@ -116,6 +119,7 @@ print(f"Response Text: {response_text}")
 # COMMAND ----------
 # Load test
 for i in range(len(dataframe_records)):
+    print(f"dataframe_records[i]: {dataframe_records[i]}")
     status_code, response_text = call_endpoint(dataframe_records[i])
     print(f"Response Status: {status_code}")
     print(f"Response Text: {response_text}")

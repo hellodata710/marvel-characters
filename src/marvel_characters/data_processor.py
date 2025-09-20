@@ -124,7 +124,13 @@ class DataProcessor:
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
 
-        # Use default database instead of Unity Catalog
+        # Drop existing tables to avoid schema conflicts
+        try:
+            self.spark.sql("DROP TABLE IF EXISTS train_set")
+            self.spark.sql("DROP TABLE IF EXISTS test_set")
+        except Exception:
+            pass
+            
         train_set_with_timestamp.write.mode("overwrite").saveAsTable("train_set")
         test_set_with_timestamp.write.mode("overwrite").saveAsTable("test_set")
 
