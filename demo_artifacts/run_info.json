@@ -5,7 +5,7 @@
         "experiment_id": "4227674276203536",
         "lifecycle_stage": "active",
         "run_id": "9c80792858bc4ed7915c15237cb8bd67",
-        "run_name": "marvel-demo-run",
+        "run_name": "mlchapter-project01-demo-run",
         "start_time": 1758336461043,
         "status": "FINISHED",
         "user_id": ""
@@ -23,10 +23,10 @@
             "mlflow.databricks.cluster.id": "0920-020112-d4ypj8wj-v2n",
             "mlflow.databricks.cluster.info": "{\"cluster_name\":\"\",\"spark_version\":\"17.1.x-photon-scala2.13\",\"autotermination_minutes\":120}",
             "mlflow.databricks.cluster.libraries": "{\"installable\":[],\"redacted\":[]}",
-            "mlflow.note.content": "marvel character prediction demo run",
+            "mlflow.note.content": "mlchapter project01 prediction demo run",
             "mlflow.runColor": "#5bc5db",
-            "mlflow.runName": "marvel-demo-run",
-            "mlflow.source.name": "c:\\Users\\ajays\\OneDrive\\Documents\\GitHub\\marvel-characters\\.venv\\Lib\\site-packages\\ipykernel_launcher.py",
+            "mlflow.runName": "mlchapter-project01-demo-run",
+            "mlflow.source.name": "c:\\Users\\ajays\\OneDrive\\Documents\\GitHub\\mlchapter-project01\\.venv\\Lib\\site-packages\\ipykernel_launcher.py",
             "mlflow.source.type": "LOCAL",
             "mlflow.user": "hellodata710@gmail.com"
         }

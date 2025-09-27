@@ -1,1 +1,1 @@
-"""Test package for marvel-characters project."""
+"""Test package for mlchapter-project01 project."""

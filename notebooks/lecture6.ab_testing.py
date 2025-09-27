@@ -1,5 +1,5 @@
 # Databricks notebook source
-# MAGIC %pip install marvelousmlops-marvel-characters-1.0.1-py3-none-any.whl
+# MAGIC %pip install mlschoolmlops-mlchapter-project01-1.0.1-py3-none-any.whl
 
 # COMMAND ----------
 
@@ -22,9 +22,9 @@ from dotenv import load_dotenv
 from mlflow.models import infer_signature
 from pyspark.sql import SparkSession
 
-from marvel_characters.config import ProjectConfig, Tags
-from marvel_characters.models.basic_model import BasicModel
-from marvel_characters.utils import is_databricks
+from mlchapter_project01.config import ProjectConfig, Tags
+from mlchapter_project01.models.basic_model import BasicModel
+from mlchapter_project01.utils import is_databricks
 
 # COMMAND ----------
 
@@ -42,7 +42,7 @@ if not is_databricks():
     mlflow.set_tracking_uri(f"databricks://{profile}")
     mlflow.set_registry_uri(f"databricks-uc://{profile}")
 
-config = ProjectConfig.from_yaml(config_path="../project_config_marvel.yml", env="dev")
+config = ProjectConfig.from_yaml(config_path="../project_config_mlchapter.yml", env="dev")
 # Define tags (customize as needed)
 tags = Tags(git_sha="dev", branch="ab-testing")
 
@@ -103,7 +103,7 @@ X_train = train_set[config.num_features + config.cat_features + ["Id"]]
 X_test = test_set[config.num_features + config.cat_features + ["Id"]]
 
 # COMMAND ----------
-mlflow.set_experiment(experiment_name="/Shared/marvel-characters-ab-testing")
+mlflow.set_experiment(experiment_name="/Shared/mlchapter-project01-ab-testing")
 model_name = f"{catalog_name}.{schema_name}.marvel_character_model_pyfunc_ab_test"
 wrapped_model = MarvelModelWrapper()
 
@@ -127,7 +127,7 @@ model_version = mlflow.register_model(
 # COMMAND ----------
 # Model serving setup
 workspace = WorkspaceClient()
-endpoint_name = "marvel-characters-ab-testing"
+endpoint_name = "mlchapter-project01-ab-testing"
 entity_version = model_version.version
 
 served_entities = [
@@ -161,7 +161,7 @@ print(dataframe_records[0])
 # Call the endpoint with one sample record
 def call_endpoint(record):
     """Calls the model serving endpoint with a given input record."""
-    serving_endpoint = f"{os.environ['DBR_HOST']}/serving-endpoints/marvel-characters-ab-testing/invocations"
+    serving_endpoint = f"{os.environ['DBR_HOST']}/serving-endpoints/mlchapter-project01-ab-testing/invocations"
 
     response = requests.post(
         serving_endpoint,

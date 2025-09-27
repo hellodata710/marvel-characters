@@ -1,5 +1,5 @@
 # Databricks notebook source
-# MAGIC %pip install marvel_characters-1.0.1-py3-none-any.whl
+# MAGIC %pip install mlchapter_project01-1.0.1-py3-none-any.whl
 
 # COMMAND ----------
 # MAGIC %restart_python
@@ -14,9 +14,9 @@ from mlflow import mlflow
 from databricks.sdk import WorkspaceClient
 from dotenv import load_dotenv
 
-from marvel_characters.config import ProjectConfig
-from marvel_characters.serving.model_serving import ModelServing
-from marvel_characters.utils import is_databricks
+from mlchapter_project01.config import ProjectConfig
+from mlchapter_project01.serving.model_serving import ModelServing
+from mlchapter_project01.utils import is_databricks
 
 
 # COMMAND ----------
@@ -38,7 +38,7 @@ if not is_databricks():
     mlflow.set_registry_uri(f"databricks-uc://{profile}")
     print(profile)
 # Load project config
-config = ProjectConfig.from_yaml(config_path="../project_config_marvel.yml", env="dev")
+config = ProjectConfig.from_yaml(config_path="../project_config_mlchapter.yml", env="dev")
 catalog_name = config.catalog_name
 schema_name = config.schema_name
 

@@ -4,8 +4,8 @@ from loguru import logger
 from pyspark.dbutils import DBUtils
 from pyspark.sql import SparkSession
 
-from marvel_characters.config import ProjectConfig
-from marvel_characters.serving.model_serving import ModelServing
+from mlchapter_project01.config import ProjectConfig
+from mlchapter_project01.serving.model_serving import ModelServing
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -26,7 +26,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-config_path = f"{args.root_path}/files/project_config_marvel.yml"
+config_path = f"{args.root_path}/files/project_config_mlchapter.yml"
 
 spark = SparkSession.builder.getOrCreate()
 dbutils = DBUtils(spark)
@@ -38,7 +38,7 @@ logger.info("Loaded config file.")
 
 catalog_name = config.catalog_name
 schema_name = config.schema_name
-endpoint_name = f"marvel-characters-model-serving-{args.env}"
+endpoint_name = f"mlchapter-project01-model-serving-{args.env}"
 endpoint_name = "marvel-character-model-serving"
 
 # Initialize Marvel Model Serving Manager

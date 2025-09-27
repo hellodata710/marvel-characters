@@ -1,4 +1,4 @@
-"""Common test fixtures for the marvel-characters project."""
+"""Common test fixtures for the mlchapter-project01 project."""
 
 import sys
 from pathlib import Path
@@ -11,7 +11,7 @@ from pyspark.sql import SparkSession
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 # Import project modules after path setup
-from marvel_characters.config import ProjectConfig  # noqa: E402
+from mlchapter_project01.config import ProjectConfig  # noqa: E402
 
 
 @pytest.fixture(scope="session")
@@ -20,7 +20,7 @@ def spark_session() -> SparkSession | MagicMock:
     try:
         return (
             SparkSession.builder.master("local[1]")
-            .appName("marvel-characters-test")
+            .appName("mlchapter-project01-test")
             .config("spark.sql.shuffle.partitions", "1")
             .config("spark.default.parallelism", "1")
             .getOrCreate()

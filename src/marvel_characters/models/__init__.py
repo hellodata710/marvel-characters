@@ -1,1 +1,0 @@
-"""Marvel characters models package."""

@@ -1,13 +1,13 @@
 resources:
   jobs:
-    marvel-characters-monitor-update:
-      name: marvel-characters-monitor-update-workflow
+    mlchapter-project01-monitor-update:
+      name: mlchapter-project01-monitor-update-workflow
       schedule:
         quartz_cron_expression: "0 0 6 ? * MON"
         timezone_id: "Europe/Amsterdam"
         pause_status: ${var.schedule_pause_status}
       tags:
-        project_name: "marvel-characters"
+        project_name: "mlchapter-project01"
 
       environments:
         - environment_key: monitor-env

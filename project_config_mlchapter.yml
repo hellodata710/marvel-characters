@@ -1,0 +1,35 @@
+prd:
+  catalog_name: mlops_prd
+  schema_name: mlchapter_project01
+acc:
+  catalog_name: mlops_acc
+  schema_name: mlchapter_project01
+dev:
+  catalog_name: mlops_dev
+  schema_name: mlchapter_project01
+
+
+experiment_name_basic: /Shared/mlchapter_project01-basic
+experiment_name_custom: /Shared/mlchapter_project01-custom
+
+parameters:
+  learning_rate: 0.01
+  n_estimators: 1000
+  max_depth: 6
+
+
+num_features:
+  - Height
+  - Weight
+
+cat_features:
+  - Universe
+  - Identity
+  - Gender
+  - Marital_Status
+  - Teams
+  - Origin
+  - Magic
+  - Mutant
+
+target: Alive

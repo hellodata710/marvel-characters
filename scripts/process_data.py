@@ -4,8 +4,8 @@ from loguru import logger
 from pyspark.sql import SparkSession
 import pandas as pd
 
-from marvel_characters.config import ProjectConfig
-from marvel_characters.data_processor import DataProcessor
+from mlchapter_project01.config import ProjectConfig
+from mlchapter_project01.data_processor import DataProcessor
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -26,18 +26,18 @@ parser.add_argument(
 
 
 args = parser.parse_args()
-config_path = f"{args.root_path}/files/project_config_marvel.yml"
+config_path = f"{args.root_path}/files/project_config_mlchapter.yml"
 
 config = ProjectConfig.from_yaml(config_path=config_path, env=args.env)
 
 logger.info("Configuration loaded:")
 logger.info(yaml.dump(config, default_flow_style=False))
 
-# Load the Marvel characters dataset
+# Load the mlchapter project01 dataset
 spark = SparkSession.builder.getOrCreate()
 
 # Example: Adjust the path and loading logic as per your Marvel dataset location
-filepath = f"{args.root_path}/files/data/marvel_characters_dataset.csv"
+filepath = f"{args.root_path}/files/data/mlchapter_project01_dataset.csv"
 
 # Load the data
 df = pd.read_csv(filepath)

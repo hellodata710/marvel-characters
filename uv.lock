@@ -797,7 +797,7 @@ wheels = [
 ]
 
 [[package]]
-name = "marvel-characters"
+name = "mlchapter-project01"
 source = { editable = "." }
 dependencies = [
     { name = "cffi" },

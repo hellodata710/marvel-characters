@@ -6,9 +6,9 @@ from pyspark.dbutils import DBUtils
 from pyspark.sql import SparkSession
 from importlib.metadata import version
 
-from marvel_characters.config import ProjectConfig, Tags
-from marvel_characters.models.basic_model import BasicModel
-from marvel_characters.models.custom_model import MarvelModelWrapper
+from mlchapter_project01.config import ProjectConfig, Tags
+from mlchapter_project01.models.basic_model import BasicModel
+from mlchapter_project01.models.custom_model import MarvelModelWrapper
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -32,7 +32,7 @@ parser.add_argument("--branch", type=str, required=True, help="branch of the pro
 
 args = parser.parse_args()
 root_path = args.root_path
-config_path = f"{root_path}/files/project_config_marvel.yml"
+config_path = f"{root_path}/files/project_config_mlchapter.yml"
 
 config = ProjectConfig.from_yaml(config_path=config_path, env=args.env)
 spark = SparkSession.builder.getOrCreate()
@@ -65,10 +65,10 @@ logger.info("Marvel model evaluation completed, model improved: %s", model_impro
 if model_improved:
     # Register the model
     basic_model.register_model()
-    marvel_characters_v = version("marvel_characters")
+    mlchapter_project01_v = version("mlchapter_project01")
 
     pyfunc_model_name = f"{config.catalog_name}.{config.schema_name}.marvel_character_model_custom"
-    code_paths=[f"{root_path}/artifacts/.internal/marvel_characters-{marvel_characters_v}-py3-none-any.whl"]
+    code_paths=[f"{root_path}/artifacts/.internal/mlchapter_project01-{mlchapter_project01_v}-py3-none-any.whl"]
 
     wrapper = MarvelModelWrapper()
     latest_version = wrapper.log_register_model(wrapped_model_uri=f"{basic_model.model_info.model_uri}",
